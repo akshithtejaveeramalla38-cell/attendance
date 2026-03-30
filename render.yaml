@@ -5,12 +5,9 @@ services:
     rootDirectory: server
     buildCommand: chmod +x mvnw && ./mvnw clean install -DskipTests
     startCommand: java -jar target/ai-attendance-system-0.0.1-SNAPSHOT.jar
-    region: oregon
     envVars:
       - key: PORT
         value: 8085
-      - key: FACE_DATA_PATH
-        value: /var/lib/attendance
       - key: OPENCV_RESOURCE_PATH
         value: src/main/resources/opencv/haarcascade_frontalface.xml
 
