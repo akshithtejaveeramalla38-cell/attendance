@@ -22,7 +22,8 @@ public class FaceController {
     private final AttendanceService attendanceService;
     private final UserService userService;
     private final FaceRecognitionService faceRecognitionService;
-    private static final String FACE_DATA_DIR = System.getProperty("user.dir") + File.separator + "face-data";
+    private static final String FACE_DATA_DIR = System.getenv("FACE_DATA_PATH") != null ? 
+            System.getenv("FACE_DATA_PATH") + File.separator + "face-data" : System.getProperty("user.dir") + File.separator + "face-data";
 
     public FaceController(AttendanceService attendanceService, UserService userService, FaceRecognitionService faceRecognitionService) {
         this.attendanceService = attendanceService;

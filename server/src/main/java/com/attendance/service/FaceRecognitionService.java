@@ -19,8 +19,10 @@ public class FaceRecognitionService {
     private final FaceTrainer faceTrainer = new FaceTrainer();
     private LBPHFaceRecognizer recognizer;
     
-    private static final String FACE_DATA_DIR = System.getProperty("user.dir") + File.separator + "face-data";
-    private static final String MODEL_PATH = System.getProperty("user.dir") + File.separator + "trained_model.yml";
+    private static final String FACE_DATA_DIR = System.getenv("FACE_DATA_PATH") != null ? 
+            System.getenv("FACE_DATA_PATH") + File.separator + "face-data" : System.getProperty("user.dir") + File.separator + "face-data";
+    private static final String MODEL_PATH = System.getenv("FACE_DATA_PATH") != null ? 
+            System.getenv("FACE_DATA_PATH") + File.separator + "trained_model.yml" : System.getProperty("user.dir") + File.separator + "trained_model.yml";
 
     @PostConstruct
     public void init() {

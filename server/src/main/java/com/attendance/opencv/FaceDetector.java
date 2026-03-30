@@ -8,8 +8,19 @@ import static org.bytedeco.opencv.global.opencv_objdetect.*;
 
 public class FaceDetector {
 
-    private final CascadeClassifier classifier = new CascadeClassifier(
-            System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "opencv" + File.separator + "haarcascade_frontalface.xml");
+    private final CascadeClassifier classifier;
+
+    public FaceDetector() {
+        String resourcePath = System.getenv("OPENCV_RESOURCE_PATH");
+        if (resourcePath == null) {
+            resourcePath = System.getProperty("user.dir") + File.separator + "src" + File.separator + "main" + File.separator + "resources" + File.separator + "opencv" + File.separator + "haarcascade_frontalface.xml";
+            if (!new File(resourcePath).exists()) {
+                // Fallback for JAR deployment - look in the current directory if src is not available
+                resourcePath = System.getProperty("user.dir") + File.separator + "opencv" + File.separator + "haarcascade_frontalface.xml";
+            }
+        }
+        this.classifier = new CascadeClassifier(resourcePath);
+    }
 
     public Rect detectFaces(String imagePath) {
         Mat image = imread(imagePath);
