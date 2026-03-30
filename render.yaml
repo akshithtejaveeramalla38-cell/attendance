@@ -5,8 +5,13 @@ services:
     buildCommand: cd server && chmod +x ./mvnw && ./mvnw clean install -DskipTests
     startCommand: cd server && java -jar target/ai-attendance-system-0.0.1-SNAPSHOT.jar
 
-  - type: web
+  - type: static
     name: ai-attendance-client
-    env: static
     buildCommand: cd client && npm install && npm run build
     publishPath: client/dist
+    envVars:
+      - key: VITE_API_URL
+        fromService:
+          name: ai-attendance-server
+          type: web
+          property: url
