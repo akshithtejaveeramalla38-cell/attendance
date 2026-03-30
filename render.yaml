@@ -1,5 +1,4 @@
 services:
-  # Backend Web Service
   - type: web
     name: ai-attendance-server
     env: java
@@ -7,22 +6,19 @@ services:
     buildCommand: chmod +x mvnw && ./mvnw clean install -DskipTests
     startCommand: java -jar target/ai-attendance-system-0.0.1-SNAPSHOT.jar
     region: oregon
-    plan: free # Change to a paid plan if you need a persistent disk
     envVars:
       - key: PORT
         value: 8085
-      - key: FACE_DATA_PATH
-        value: /var/lib/attendance # If using a disk, mount it here
       - key: OPENCV_RESOURCE_PATH
         value: src/main/resources/opencv/haarcascade_frontalface.xml
+      - key: FACE_DATA_PATH
+        value: /var/lib/attendance
 
-  # Frontend Static Site
-  - type: web
+  - type: static_site
     name: ai-attendance-client
-    env: static
+    rootDirectory: client
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-    rootDirectory: client
     envVars:
       - key: VITE_API_URL
         fromService:
