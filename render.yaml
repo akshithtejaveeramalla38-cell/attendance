@@ -11,12 +11,8 @@ services:
       - key: OPENCV_RESOURCE_PATH
         value: src/main/resources/opencv/haarcascade_frontalface.xml
 
-  - type: web
+  - type: static_site
     name: ai-attendance-client
-    env: static
     rootDirectory: client
     buildCommand: npm install && npm run build
     staticPublishPath: dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://ai-attendance-server.onrender.com/api
