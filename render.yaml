@@ -9,19 +9,17 @@ services:
     envVars:
       - key: PORT
         value: 8085
-      - key: OPENCV_RESOURCE_PATH
-        value: src/main/resources/opencv/haarcascade_frontalface.xml
       - key: FACE_DATA_PATH
         value: /var/lib/attendance
+      - key: OPENCV_RESOURCE_PATH
+        value: src/main/resources/opencv/haarcascade_frontalface.xml
 
-  - type: static_site
+  - type: web
     name: ai-attendance-client
+    env: static
     rootDirectory: client
     buildCommand: npm install && npm run build
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        fromService:
-          type: web
-          name: ai-attendance-server
-          property: url
+        value: https://ai-attendance-server.onrender.com/api
