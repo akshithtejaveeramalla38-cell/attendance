@@ -7,7 +7,7 @@ services:
 
   - type: web
     name: ai-attendance-client
-    env: static
+    runtime: static
     buildCommand: cd client && npm install && npm run build
     staticPublishPath: client/dist
     envVars:
