@@ -1,9 +1,11 @@
 services:
   - type: web
     name: ai-attendance-server
-    env: java
-    buildCommand: cd server && chmod +x ./mvnw && ./mvnw clean install -DskipTests
-    startCommand: cd server && java -jar target/ai-attendance-system-0.0.1-SNAPSHOT.jar
+    env: docker
+    rootDir: server
+    envVars:
+      - key: PORT
+        value: 8085
 
   - type: web
     name: ai-attendance-client
@@ -15,4 +17,4 @@ services:
         fromService:
           name: ai-attendance-server
           type: web
-          property: url
+          envVarKey: RENDER_EXTERNAL_URL
