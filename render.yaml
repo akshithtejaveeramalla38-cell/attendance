@@ -2,13 +2,11 @@ services:
   - type: web
     name: ai-attendance-server
     env: java
-    rootDirectory: server
-    buildCommand: chmod +x ./mvnw && ./mvnw clean install -DskipTests
-    startCommand: java -jar target/ai-attendance-system-0.0.1-SNAPSHOT.jar
+    buildCommand: cd server && chmod +x ./mvnw && ./mvnw clean install -DskipTests
+    startCommand: cd server && java -jar target/ai-attendance-system-0.0.1-SNAPSHOT.jar
 
   - type: web
     name: ai-attendance-client
     env: static
-    rootDirectory: client
-    buildCommand: npm install && npm run build
-    publishPath: dist
+    buildCommand: cd client && npm install && npm run build
+    publishPath: client/dist
