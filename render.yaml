@@ -2,7 +2,6 @@ services:
   # Backend Web Service
   - type: web
     name: ai-attendance-server
-    runtime: java
     env: java
     rootDirectory: server
     buildCommand: chmod +x mvnw && ./mvnw clean install -DskipTests
@@ -18,9 +17,8 @@ services:
         value: src/main/resources/opencv/haarcascade_frontalface.xml
 
   # Frontend Static Site
-  - type: static
+  - type: static_site
     name: ai-attendance-client
-    runtime: node
     buildCommand: npm install && npm run build
     publishPath: dist
     rootDirectory: client
