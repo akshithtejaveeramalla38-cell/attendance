@@ -3,9 +3,9 @@ target/
 *.class
 
 # Maven
-.mvn/
-mvnw
-mvnw.cmd
+# .mvn/
+# mvnw
+# mvnw.cmd
 
 # IDE Specific
 .idea/
